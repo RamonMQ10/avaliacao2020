@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<h:body style="margin:0">
+  <h:form>  
+    <p:growl id="messages"/>
+ 
+    <p:menubar style="border:none; margin-top:0; background-color:#f3f3f3">
+        <p:menuitem value="Inicio" action="#{PeladaMB.inicio}" icon="ui-icon-home" update="messages" ajax="false"/>
+ 		<p:menuitem value="Nova pelada" action="#{PeladaMB.cadastrarPelada}" icon="ui-icon-plus" update="messages" ajax="false" />
+ 		<p:menuitem value="Todas as pelada" action="#{PeladaMB.listarPelada}" icon="ui-icon-plus" update="messages" ajax="false" />
+ 	
+        <f:facet name="options">
+            <p:commandButton style="background-color:#f3f3f3" value="Sair" action="#{PeladaMB.sair}" icon="ui-icon-arrowthickstop-1-e" ajax="false"/>
+        </f:facet>
+    </p:menubar>
+    	<center><h2>Peladas Cadastradas</h2></center>
+      
+     <p:dataTable emptyMessage="Não há peladas cadastradas"
+		value="#{PeladaMB.listaPeladas}" var="e" styleClass="order-table"
+		headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row" paginator="true"
+		rows="20">
+		
+		<p:message for="total" />
+		
+		<p:column headerText="Nome do Evento Esportivo">
+			<h:outputText value="#{e.nomeEventoEsportivo}" />
+		</p:column>
+		
+		<p:column headerText="Data do Evento">
+			<h:outputText value="#{e.dataEvento}" >
+    			<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</p:column>
+		
+		<p:column headerText="Hora do Evento">
+			<h:outputText value="#{e.hora}" >
+    			<f:convertDateTime pattern="HH:mm:ss" />
+			</h:outputText>
+		</p:column>
+		
+		<p:column headerText="Local do Evento">
+			<h:outputText value="#{e.localEvento}" />
+		</p:column>
+		
+		<p:column>
+			<h:form id="commandForm">
+				
+				<h:commandButton value="Vincular" styleClass="fs-button-portfolio"
+					action="#{PeladaMB.vinculaUsuarioPelada}" ajax="false">
+					<f:setPropertyActionListener target="#{PeladaMB.selectedPeladaId}"
+						value="#{e.peladaId}" />
+					<f:setPropertyActionListener target="#{PeladaMB.selectedUsuarioId}"
+						value="#{LoginMB.usuario.usuarioId}" />
+				</h:commandButton>
+
+			</h:form>
+		</p:column>
+		
+	</p:dataTable>	 
+</h:form>
+</h:body>
+</html>

@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <h:form id="studentSaveForm2" styleClass="form-horizontal">
+    	<p:menubar style="border:none; margin-top:0; background-color:#f3f3f3">
+        <p:menuitem value="Inicio" action="#{PeladaMB.inicio}" icon="ui-icon-home" update="messages" ajax="false"/>
+ 		<p:menuitem value="Nova pelada" action="#{PeladaMB.cadastrarPelada}" icon="ui-icon-plus" update="messages" ajax="false" />
+ 		<p:menuitem value="Todas as pelada" action="#{PeladaMB.listarPelada}" icon="ui-icon-plus" update="messages" ajax="false" />
+ 		
+        <f:facet name="options">
+            <p:commandButton style="background-color:#f3f3f3" value="Sair" action="#{PeladaMB.sair}" icon="ui-icon-arrowthickstop-1-e" ajax="false"/>
+        </f:facet>
+    </p:menubar>
+    <center><h2>Cadastro de Peladas</h2></center>
+        <h:panelGrid columns="2">
+        	<div class="form-group">
+                <h:outputLabel value="Nome do Evento Esportivo:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <p:inputText value="#{PeladaMB.pelada.nomeEventoEsportivo}" styleClass="form-control" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Data do Evento:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <p:inputText value="#{PeladaMB.pelada.dataEvento}" styleClass="form-control" >
+            			<f:convertDateTime pattern = "dd/MM/yyyy" />
+         			</p:inputText>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Hora do Evento:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <p:inputText value="#{PeladaMB.pelada.hora}" styleClass="form-control" >
+            			<f:convertDateTime type="time" pattern = "HH:mm:ss"/>
+         			</p:inputText>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Local do Evento:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <p:inputText value="#{PeladaMB.pelada.localEvento}" styleClass="form-control" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <h:commandButton value="Salvar" action="#{PeladaMB.salvarNovaPelada}" styleClass="btn btn-primary btn-sm btnPos" />
+                </div>
+            </div>
+           
+        </h:panelGrid>
+    </h:form>
+    </h:body>
+</html>

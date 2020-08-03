@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <h:form id="studentSaveForm2" styleClass="form-horizontal">
+    	<p:menubar style="border:none; margin-top:0; background-color:#f3f3f3">
+        <p:menuitem value="Inicio" action="#{PeladaMB.inicio}" icon="ui-icon-home" update="messages" ajax="false"/>
+ 		<p:menuitem value="Nova pelada" action="#{PeladaMB.cadastrarPelada}" icon="ui-icon-plus" update="messages" ajax="false" />
+ 		<p:menuitem value="Todas as pelada" action="#{PeladaMB.listarPelada}" icon="ui-icon-plus" update="messages" ajax="false" />
+ 		
+        <f:facet name="options">
+            <p:commandButton style="background-color:#f3f3f3" value="Sair" action="#{PeladaMB.sair}" icon="ui-icon-arrowthickstop-1-e" ajax="false"/>
+        </f:facet>
+    </p:menubar>
+    <center><h2>Convidar Amigo</h2></center>
+        <h:panelGrid columns="2">
+        		 <p:dataTable emptyMessage="Não há peladas cadastradas"
+						value="#{PeladaMB.listaUsuarios}" var="usuario" styleClass="order-table"
+						headerClass="order-table-header"
+						rowClasses="order-table-odd-row,order-table-even-row" paginator="true"
+						rows="20">
+						
+						<p:message for="total" />
+						
+						<p:column headerText="Nome Completo">
+							<h:outputText value="#{usuario.nomeCompleto}" />
+						</p:column>
+						
+						<p:column headerText="Apelido">
+							<h:outputText value="#{usuario.apelido}" />
+						</p:column>
+						
+						<p:column headerText="Email">
+							<h:outputText value="#{usuario.email}" />
+						</p:column>
+						
+						<p:column>
+							<h:form id="commandForm">
+								
+								<h:commandButton value="Convidar" styleClass="fs-button-portfolio"
+									action="#{PeladaMB.vinculaUsuarioPelada}" ajax="false" >
+									<f:setPropertyActionListener target="#{PeladaMB.selectedUsuarioId}"
+										value="#{usuario.usuarioId}" />
+									<f:setPropertyActionListener target="#{PeladaMB.selectedPeladaId}"
+										value="#{PeladaMB.pelada.peladaId}" />
+								</h:commandButton>
+				
+							</h:form>
+						</p:column>
+				</p:dataTable>     
+        </h:panelGrid>
+    </h:form>
+    </h:body>
+</html>
