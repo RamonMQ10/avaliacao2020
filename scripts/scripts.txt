@@ -1,0 +1,33 @@
+1 - Criar base de dados com o nome "avaliacao"
+
+2 - Rodar scripts
+
+CREATE TABLE Usuario (
+    UsuarioID serial UNIQUE NOT NULL,
+    NomeCompleto varchar(255),
+    Apelido varchar(255),
+    Email varchar(255),
+    Senha varchar(255),
+    PRIMARY KEY (UsuarioID, Email)
+);
+
+CREATE TABLE PeladaUsuario (
+    PeladaUsuarioID serial UNIQUE NOT NULL,
+    PeladaID int,
+    UsuarioID int
+);
+
+CREATE TABLE Pelada (
+    PeladaID serial UNIQUE NOT NULL,
+    NomeEventoEsportivo text,
+    DataEvento date,
+    Hora time,
+    LocalEvento text,
+    PRIMARY KEY (PeladaID)
+);
+
+ALTER TABLE PeladaUsuario
+ADD FOREIGN KEY (PeladaID) REFERENCES Pelada(PeladaID);
+
+ALTER TABLE PeladaUsuario
+ADD FOREIGN KEY (UsuarioID) REFERENCES Usuario(UsuarioID);
